@@ -49,7 +49,7 @@ async function parsePdf(buffer: Buffer, fileName: string): Promise<ParsedDocumen
     }
   }
 
-  html = html.replace(/(<li>.*?<\/li>\n)+/gs, (match) => `<ul>\n${match}</ul>\n`);
+  html = html.replace(/(<li>[\s\S]*?<\/li>\n)+/g, (match) => `<ul>\n${match}</ul>\n`);
 
   const title = inferTitle(html, fileName);
   return {
