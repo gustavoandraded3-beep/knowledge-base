@@ -18,12 +18,12 @@ function generateExcerpt(content: string, maxLength = 200): string {
 }
 
 function inferTitle(content: string, fileName: string): string {
-  // Try to grab from first <h1> or <h2>
   const h1 = content.match(/<h1[^>]*>(.*?)<\/h1>/i);
   if (h1) return h1[1].replace(/<[^>]+>/g, "").trim();
+
   const h2 = content.match(/<h2[^>]*>(.*?)<\/h2>/i);
   if (h2) return h2[1].replace(/<[^>]+>/g, "").trim();
-  // Fall back to filename without extension
+
   return path.basename(fileName, path.extname(fileName)).replace(/[-_]/g, " ");
 }
 
@@ -31,32 +31,24 @@ function countWords(text: string): number {
   return text.trim().split(/\s+/).filter(Boolean).length;
 }
 
-// ─── PDF Parser ─────────────────────────────────────────────
-
 async function parsePdf(buffer: Buffer, fileName: string): Promise<ParsedDocument> {
-  // Dynamically import to avoid SSR issues with native modules
   const pdfParse = (await import("pdf-parse")).default;
   const data = await pdfParse(buffer);
 
   const rawText = data.text;
   const lines = rawText.split("\n").map((l) => l.trim()).filter(Boolean);
 
-  // Build basic HTML from lines
   let html = "";
   for (const line of lines) {
     if (line.length < 80 && line === line.toUpperCase() && line.length > 3) {
-      // Looks like a heading
       html += `<h2>${escapeHtml(line)}</h2>\n`;
     } else if (line.startsWith("•") || line.startsWith("-") || line.startsWith("*")) {
-      html += `<li>${escapeHtml(line.replace(/
-^
-[•\-*]\s*/, ""))}</li>\n`;
+      html += `<li>${escapeHtml(line.replace(/^[•\-*]\s*/, ""))}</li>\n`;
     } else {
       html += `<p>${escapeHtml(line)}</p>\n`;
     }
   }
 
-  // Wrap consecutive <li> in <ul>
   html = html.replace(/(<li>.*?<\/li>\n)+/gs, (match) => `<ul>\n${match}</ul>\n`);
 
   const title = inferTitle(html, fileName);
@@ -68,8 +60,6 @@ async function parsePdf(buffer: Buffer, fileName: string): Promise<ParsedDocumen
     fileType: "pdf",
   };
 }
-
-// ─── DOCX Parser ─────────────────────────────────────────────
 
 async function parseDocx(buffer: Buffer, fileName: string): Promise<ParsedDocument> {
   const mammoth = await import("mammoth");
@@ -85,8 +75,6 @@ async function parseDocx(buffer: Buffer, fileName: string): Promise<ParsedDocume
     fileType: "docx",
   };
 }
-
-// ─── Plain Text Parser ───────────────────────────────────────
 
 function parseTxt(buffer: Buffer, fileName: string): ParsedDocument {
   const text = buffer.toString("utf-8");
@@ -111,17 +99,13 @@ function parseTxt(buffer: Buffer, fileName: string): ParsedDocument {
   };
 }
 
-// ─── HTML Escape ────────────────────────────────────────────
-
 function escapeHtml(text: string): string {
   return text
-    .replace(/&/g, "&")
-    .replace(/</g, "<")
-    .replace(/>/g, ">")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
 }
-
-// ─── Main Dispatcher ─────────────────────────────────────────
 
 export async function parseDocument(
   buffer: Buffer,
@@ -135,7 +119,6 @@ export async function parseDocument(
     case ".docx":
       return parseDocx(buffer, fileName);
     case ".doc":
-      // For .doc we attempt docx parser (works for many modern .doc files)
       try {
         return await parseDocx(buffer, fileName);
       } catch {
