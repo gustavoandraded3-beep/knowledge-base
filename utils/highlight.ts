@@ -1,6 +1,6 @@
 export function highlightText(text: string, query: string): string {
   if (!query.trim()) return text;
-  const escaped = query.replace(/[.*+?^${}()|[$|\$|/g, "\\$&");
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   const regex = new RegExp(`(${escaped})`, "gi");
   return text.replace(regex, '<mark class="bg-yellow-200 dark:bg-yellow-800 rounded px-0.5">$1</mark>');
 }
