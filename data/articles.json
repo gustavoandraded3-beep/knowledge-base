@@ -3,13 +3,6 @@
     "id": "art-1",
     "title": "Welcome to the Engineering Knowledge Base",
     "slug": "welcome-to-engineering-knowledge-base",
-    "content": "<h2
-
-[
-  {
-    "id": "art-1",
-    "title": "Welcome to the Engineering Knowledge Base",
-    "slug": "welcome-to-engineering-knowledge-base",
     "content": "<h2 id='overview'>Overview</h2><p>This knowledge base is the single source of truth for all engineering documentation at our company. It contains architecture guides, coding standards, onboarding materials, and operational runbooks.</p><h2 id='how-to-use'>How to Use This Knowledge Base</h2><p>Use the search bar at the top to find articles by keyword. You can also browse by category using the sidebar navigation. Each article includes a table of contents for quick navigation within longer documents.</p><h2 id='contributing'>Contributing</h2><p>All engineers are encouraged to contribute to the knowledge base. If you find outdated information or want to add a new article, contact the platform team or use the Admin Panel to upload a document directly.</p><h3 id='guidelines'>Contribution Guidelines</h3><ul><li>Keep articles concise and actionable</li><li>Use clear headings to structure content</li><li>Add relevant tags to improve discoverability</li><li>Review articles at least quarterly</li></ul><h2 id='support'>Support</h2><p>For questions about the knowledge base platform itself, reach out to the #platform-engineering Slack channel.</p>",
     "excerpt": "This knowledge base is the single source of truth for all engineering documentation. Learn how to navigate, search, and contribute.",
     "category": "getting-started",
