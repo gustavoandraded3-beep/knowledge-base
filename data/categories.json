@@ -1,0 +1,50 @@
+[
+  {
+    "id": "cat-1",
+    "name": "Getting Started",
+    "slug": "getting-started",
+    "description": "Onboarding guides and introductory materials for new team members.",
+    "icon": "Rocket",
+    "color": "bg-violet-100 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300"
+  },
+  {
+    "id": "cat-2",
+    "name": "Engineering",
+    "slug": "engineering",
+    "description": "Technical documentation, architecture guides, and development standards.",
+    "icon": "Code2",
+    "color": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+  },
+  {
+    "id": "cat-3",
+    "name": "HR & People",
+    "slug": "hr-people",
+    "description": "Policies, benefits, and people operations documentation.",
+    "icon": "Users",
+    "color": "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
+  },
+  {
+    "id": "cat-4",
+    "name": "Product",
+    "slug": "product",
+    "description": "Product roadmaps, specs, and design guidelines.",
+    "icon": "Layers",
+    "color": "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-300"
+  },
+  {
+    "id": "cat-5",
+    "name": "Security",
+    "slug": "security",
+    "description": "Security policies, compliance requirements, and best practices.",
+    "icon": "Shield",
+    "color": "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300"
+  },
+  {
+    "id": "cat-6",
+    "name": "Operations",
+    "slug": "operations",
+    "description": "Operational runbooks, incident management, and support guides.",
+    "icon": "Settings",
+    "color": "bg-slate-100 text-slate-700 dark:bg-slate-900/30 dark:text-slate-300"
+  }
+]
